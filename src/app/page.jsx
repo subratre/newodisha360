@@ -1312,12 +1312,13 @@ function MainComponent() {
                 ))}
               </div>
               <div className="text-center mt-8">
-                <button
-                  onClick={scrollToMoreCourses}
+                <Link
+                  href="/courses"
+                  // onClick={scrollToMoreCourses}
                   className="bg-gray-100 text-gray-700 px-8 py-3 rounded-lg font-bold hover:bg-gray-200 transition-colors inline-flex items-center gap-2"
                 >
                   Learn More <i className="fas fa-arrow-right"></i>
-                </button>
+                </Link>
               </div>
             </section>
             {/* <section className="bg-white py-16 -mx-4 px-4 mb-16">
