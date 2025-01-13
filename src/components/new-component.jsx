@@ -1,12 +1,38 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 
-function NewComponent({ title, testimonials }) {
+function NewComponent() {
+  const testimonials = [
+    {
+      id: 1,
+      name: "Sarah Johnson",
+      role: "UPSC Aspirant",
+      image: "/student1.jpg",
+      text: "Study Mentor transformed my preparation journey. The mentors are exceptional and the study material is comprehensive.",
+      rating: 5,
+    },
+    {
+      id: 2,
+      name: "Michael Chen",
+      role: "IAS Officer",
+      image: "/student2.jpg",
+      text: "Thanks to Study Mentor, I cleared my exam in the first attempt. The structured approach made all the difference.",
+      rating: 5,
+    },
+    {
+      id: 3,
+      name: "Priya Patel",
+      role: "State Services",
+      image: "/student3.jpg",
+      text: "The mock tests and personalized feedback helped me identify my weaknesses and improve systematically.",
+      rating: 5,
+    },
+  ];
   return (
     <section className="mb-16 bg-gradient-to-r from-[#1a365d] to-[#2d3748] py-16 -mx-4 px-4">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl font-crimson-text font-bold text-white text-center mb-12">
-          {title}
+          Why Students Love Study Mentor
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial) => (
