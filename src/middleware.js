@@ -1,18 +1,24 @@
+// middleware.ts
+import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 
-export const config = {
-  matcher: "/integrations/:path*",
-};
+// Middleware to check if user is authenticated
+export async function middleware(req) {
+  // Get the session token from the request
+  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
 
-export function middleware(request) {
-  const requestHeaders = new Headers(request.headers);
-  requestHeaders.set("x-createxyz-project-id", "a10a4961-c3bb-497d-b75c-0a7fd8308a0f");
+  // If no token exists, redirect to the Google login page
+  if (!token) {
+    const url = req.nextUrl.clone();
+    url.pathname = "/api/auth/signin/google"; // Redirect to Google sign-in page
+    return NextResponse.redirect(url);
+  }
 
-  request.nextUrl.href = `https://www.create.xyz/${request.nextUrl.pathname}`;
-
-  return NextResponse.rewrite(request.nextUrl, {
-    request: {
-      headers: requestHeaders,
-    },
-  });
+  // If the token exists (authenticated), allow the request to proceed
+  return NextResponse.next();
 }
+
+// Protect specific routes (e.g., /dashboard or /profile)
+export const config = {
+  matcher: ["/dashboard", "/profile"], // Add routes you want to protect
+};
